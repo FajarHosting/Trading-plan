@@ -10,7 +10,7 @@ function simpanPlan() {
     }
 
     let saldoUSD = (saldo / 15000).toFixed(2); // Konversi IDR ke USD (asumsi 1 USD = 15,000 IDR)
-    let hitTP = (lotSize * 20 * 10).toFixed(2); // 40 pips hitungannya per lot (asumsi 10$ per lot)
+    let hitTP = (lotSize * 20 * 2).toFixed(2); // 40 pips hitungannya per lot (asumsi 10$ per lot)
 
     let tradingPlan = { saldo, saldoUSD, lotSize, hitTP };
 
