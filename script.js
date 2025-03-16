@@ -1,22 +1,29 @@
-const form = document.getElementById('form-data');
-const table = document.getElementById('table-data');
-const tbody = document.getElementById('tbody-data');
+function hitungPlan() {
+    let modal = document.getElementById("modal").value;
+    let riskPercent = document.getElementById("risk").value;
+    let rewardRatio = document.getElementById("reward").value;
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const tanggal = document.getElementById('tanggal').value;
-    const symbol = document.getElementById('symbol').value;
-    const entry = document.getElementById('entry').value;
-    const target = document.getElementById('target').value;
-    const stoploss = document.getElementById('stoploss').value;
+    let riskAmount = (modal * (riskPercent / 100)).toFixed(2);
+    let targetProfit = (riskAmount * rewardRatio).toFixed(2);
 
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td>${tanggal}</td>
-        <td>${symbol}</td>
-        <td>${entry}</td>
-        <td>${target}</td>
-        <td>${stoploss}</td>
-    `;
-    tbody.appendChild(row);
-});
+    document.getElementById("riskAmount").textContent = riskAmount;
+    document.getElementById("targetProfit").textContent = targetProfit;
+
+    // Data Simulasi Harga BTC
+    let labels = ["Hari 1", "Hari 2", "Hari 3", "Hari 4", "Hari 5"];
+    let hargaBTC = [40000, 40500, 39800, 41000, 42000];
+
+    let ctx = document.getElementById("chart").getContext("2d");
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Harga BTC/USD",
+                data: hargaBTC,
+                borderColor: "blue",
+                fill: false
+            }]
+        }
+    });
+}
