@@ -8,37 +8,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Catatan Trading Plan By FAJAR</h1>
+    <h2>Catatan Trading Plan By FAJAR</h2>
 
-        <div class="input-section">
-            <label>Saldo (IDR):</label>
-            <input type="number" id="saldo" placeholder="Contoh: 1000000">
+    <label for="saldo">Saldo (IDR):</label>
+    <input type="number" id="saldo" placeholder="Contoh: 1000000">
 
-            <label>Lot Size:</label>
-            <input type="number" id="lotSize" placeholder="Contoh: 0.05">
+    <label for="lotSize">Lot Size:</label>
+    <input type="number" id="lotSize" placeholder="Contoh: 0.05" step="0.01">
 
-            <label>Jumlah Pips:</label>
-            <input type="number" id="pips" placeholder="Contoh: 50">
+    <label for="pips">Jumlah Pips:</label>
+    <input type="number" id="pips" placeholder="Contoh: 50">
 
-            <button onclick="simpanPlan()">Simpan Data</button>
-        </div>
+    <button onclick="simpanPlan()">Simpan Data</button>
 
-        <h2>Riwayat Trading Plan</h2>
-        <table>
-            <thead>
-                <tr>
-             <th>Saldo (IDR)</th>
-             <th>Saldo (USD)</th>
-             <th>Lot Size</th>
-             <th>Hit TP ($)</th>
-             <th>Profit (IDR)</th>
-             <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="tradingPlanTable"></tbody>
-        </table>
-    </div>
+    <h3>Riwayat Trading Plan</h3>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <table>
+        <thead>
+            <tr>
+                <th>Saldo (IDR)</th>
+                <th>Saldo (USD)</th>
+                <th>Lot Size</th>
+                <th>Hit TP ($)</th>
+                <th>Profit (IDR)</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="tradingPlanTable"></tbody>
+    </table>
+</div>
