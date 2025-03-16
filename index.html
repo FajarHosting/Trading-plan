@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Plan</title>
+    <title>Catatan Trading Plan</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Trading Plan</h1>
-        
+        <h1>Catatan Trading Plan</h1>
+
         <div class="input-section">
-            <label for="modal">Modal (USD):</label>
-            <input type="number" id="modal" value="1000">
+            <label>Saldo (IDR):</label>
+            <input type="number" id="saldo" placeholder="Contoh: 1000000">
 
-            <label for="risk">Risiko per Trade (%):</label>
-            <input type="number" id="risk" value="2">
+            <label>Lot Size:</label>
+            <input type="number" id="lotSize" placeholder="Contoh: 0.05">
 
-            <label for="reward">Risk-Reward Ratio:</label>
-            <input type="number" id="reward" value="2">
-
-            <button onclick="hitungPlan()">Hitung</button>
+            <button onclick="simpanPlan()">Simpan Data</button>
         </div>
 
-        <div class="output-section">
-            <h3>Hasil Trading Plan:</h3>
-            <p><strong>Risiko per Trade:</strong> <span id="riskAmount"></span> USD</p>
-            <p><strong>Target Profit per Trade:</strong> <span id="targetProfit"></span> USD</p>
-        </div>
-
-        <canvas id="chart"></canvas>
+        <h2>Riwayat Trading Plan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Saldo (IDR)</th>
+                    <th>Saldo (USD)</th>
+                    <th>Lot Size</th>
+                    <th>Hit TP (40 Pips)</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tradingPlanTable"></tbody>
+        </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
