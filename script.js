@@ -1,29 +1,47 @@
-function hitungPlan() {
-    let modal = document.getElementById("modal").value;
-    let riskPercent = document.getElementById("risk").value;
-    let rewardRatio = document.getElementById("reward").value;
+document.addEventListener("DOMContentLoaded", loadTradingPlans);
 
-    let riskAmount = (modal * (riskPercent / 100)).toFixed(2);
-    let targetProfit = (riskAmount * rewardRatio).toFixed(2);
+function simpanPlan() {
+    let saldo = document.getElementById("saldo").value;
+    let lotSize = document.getElementById("lotSize").value;
 
-    document.getElementById("riskAmount").textContent = riskAmount;
-    document.getElementById("targetProfit").textContent = targetProfit;
+    if (saldo === "" || lotSize === "") {
+        alert("Harap isi semua data!");
+        return;
+    }
 
-    // Data Simulasi Harga BTC
-    let labels = ["Hari 1", "Hari 2", "Hari 3", "Hari 4", "Hari 5"];
-    let hargaBTC = [40000, 40500, 39800, 41000, 42000];
+    let saldoUSD = (saldo / 15000).toFixed(2); // Konversi IDR ke USD (asumsi 1 USD = 15,000 IDR)
+    let hitTP = (lotSize * 40 * 10).toFixed(2); // 40 pips hitungannya per lot (asumsi 10$ per lot)
 
-    let ctx = document.getElementById("chart").getContext("2d");
-    new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "Harga BTC/USD",
-                data: hargaBTC,
-                borderColor: "blue",
-                fill: false
-            }]
-        }
+    let tradingPlan = { saldo, saldoUSD, lotSize, hitTP };
+
+    let plans = JSON.parse(localStorage.getItem("tradingPlans")) || [];
+    plans.push(tradingPlan);
+    localStorage.setItem("tradingPlans", JSON.stringify(plans));
+
+    loadTradingPlans();
+}
+
+function loadTradingPlans() {
+    let tableBody = document.getElementById("tradingPlanTable");
+    tableBody.innerHTML = "";
+
+    let plans = JSON.parse(localStorage.getItem("tradingPlans")) || [];
+
+    plans.forEach((plan, index) => {
+        let row = `<tr>
+            <td>${plan.saldo}</td>
+            <td>${plan.saldoUSD} USD</td>
+            <td>${plan.lotSize}</td>
+            <td>${plan.hitTP} USD</td>
+            <td><button class="delete-btn" onclick="hapusPlan(${index})">Hapus</button></td>
+        </tr>`;
+        tableBody.innerHTML += row;
     });
+}
+
+function hapusPlan(index) {
+    let plans = JSON.parse(localStorage.getItem("tradingPlans")) || [];
+    plans.splice(index, 1);
+    localStorage.setItem("tradingPlans", JSON.stringify(plans));
+    loadTradingPlans();
 }
