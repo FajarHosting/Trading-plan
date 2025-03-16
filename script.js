@@ -33,7 +33,7 @@ function loadTradingPlans() {
             <td>${plan.saldo}</td>
             <td>${plan.saldoUSD} USD</td>
             <td>${plan.lotSize}</td>
-            <td>${plan.hitTP} USD (${plan.pips} pips)</td>
+            <td>$${plan.hitTP} (${plan.pips} pips)</td>
             <td><button class="delete-btn" onclick="hapusPlan(${index})">Hapus</button></td>
         </tr>`;
         tableBody.innerHTML += row;
