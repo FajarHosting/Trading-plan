@@ -3,16 +3,17 @@ document.addEventListener("DOMContentLoaded", loadTradingPlans);
 function simpanPlan() {
     let saldo = document.getElementById("saldo").value;
     let lotSize = document.getElementById("lotSize").value;
+    let pips = document.getElementById("pips").value;
 
-    if (saldo === "" || lotSize === "") {
+    if (saldo === "" || lotSize === "" || pips === "") {
         alert("Harap isi semua data!");
         return;
     }
 
     let saldoUSD = (saldo / 15000).toFixed(2); // Konversi IDR ke USD (asumsi 1 USD = 15,000 IDR)
-    let hitTP = (lotSize * 20 * 2).toFixed(2); // 40 pips hitungannya per lot (asumsi 10$ per lot)
+    let hitTP = (lotSize * pips * 10).toFixed(2); // Perhitungan keuntungan berdasarkan pips yang diatur
 
-    let tradingPlan = { saldo, saldoUSD, lotSize, hitTP };
+    let tradingPlan = { saldo, saldoUSD, lotSize, pips, hitTP };
 
     let plans = JSON.parse(localStorage.getItem("tradingPlans")) || [];
     plans.push(tradingPlan);
@@ -32,7 +33,7 @@ function loadTradingPlans() {
             <td>${plan.saldo}</td>
             <td>${plan.saldoUSD} USD</td>
             <td>${plan.lotSize}</td>
-            <td>${plan.hitTP} USD</td>
+            <td>${plan.hitTP} USD (${plan.pips} pips)</td>
             <td><button class="delete-btn" onclick="hapusPlan(${index})">Hapus</button></td>
         </tr>`;
         tableBody.innerHTML += row;
